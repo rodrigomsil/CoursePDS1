@@ -11,7 +11,7 @@ import com.iftm.PDS1.entities.pk.OrderItemPK;
 @Table(name = "td_order_iten")
 public class OrderItem {
 
-	@EmbeddedId
+	@EmbeddedId 
 	private OrderItemPK id = new OrderItemPK();
 	
 	private Integer quantity;
