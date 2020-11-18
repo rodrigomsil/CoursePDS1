@@ -15,6 +15,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.iftm.PDS1.entities.enums.OrderStatus;
 
 @Entity
@@ -50,6 +51,7 @@ public class Order implements Serializable {
 		this.Client = client;
 	}
 
+	
 	public Set<OrderItem> getItens (){
 		return itens;
 	}
