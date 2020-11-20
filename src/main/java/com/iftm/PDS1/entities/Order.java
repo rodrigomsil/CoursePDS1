@@ -1,4 +1,4 @@
-package com.iftm.PDS1.entities;
+	package com.iftm.PDS1.entities;
 
 import java.io.Serializable;
 import java.time.Instant;
@@ -102,6 +102,14 @@ public class Order implements Serializable {
 		if(orderStatus != null) {
 			this.orderStatus = orderStatus.getCode();
 		}
+	}
+	
+	public Double getTotal() {
+		double sum = 0.0;
+		for(OrderItem x : itens) {
+			sum += x.getsubTotal();
+		}
+		return sum;
 	}
 
 	@Override
