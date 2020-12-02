@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.iftm.PDS1.dto.CategoryDTO;
-import com.iftm.PDS1.dto.CategoryInsertDTO;
 import com.iftm.PDS1.entities.Category;
 import com.iftm.PDS1.repositories.CategoryRepository;
 import com.iftm.PDS1.services.exceptions.DatabaseException;
@@ -37,7 +36,7 @@ public class CategoryService {
 	}
 	
 	
-	public CategoryDTO insert(CategoryInsertDTO dto) {
+	public CategoryDTO insert(CategoryDTO dto) {
 		Category entity = dto.toEntity();
 		entity = repository.save(entity);
 		return new CategoryDTO(entity);

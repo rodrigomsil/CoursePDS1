@@ -3,10 +3,8 @@ package com.iftm.PDS1.entities.pk;
 import java.io.Serializable;
 
 import javax.persistence.Embeddable;
-import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 
 import com.iftm.PDS1.entities.Order;
 import com.iftm.PDS1.entities.Product;

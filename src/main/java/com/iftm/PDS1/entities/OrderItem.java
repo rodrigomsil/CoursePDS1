@@ -2,7 +2,6 @@ package com.iftm.PDS1.entities;
 
 import java.io.Serializable;
 
-import javax.persistence.Embedded;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
