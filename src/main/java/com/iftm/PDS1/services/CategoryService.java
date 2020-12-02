@@ -2,6 +2,7 @@ package com.iftm.PDS1.services;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.persistence.EntityNotFoundException;
 
@@ -10,8 +11,8 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import com.iftm.PDS1.dto.CategoryDTO;
 import com.iftm.PDS1.entities.Category;
-import com.iftm.PDS1.entities.User;
 import com.iftm.PDS1.repositories.CategoryRepository;
 import com.iftm.PDS1.services.exceptions.DatabaseException;
 import com.iftm.PDS1.services.exceptions.ResourceNotFoundException;
@@ -22,13 +23,15 @@ public class CategoryService {
 	@Autowired
 	private CategoryRepository  repository;
 
-	public List<Category> findAll() {
-		return repository.findAll();
+	public List<CategoryDTO> findAll() {
+		List<Category> list = repository.findAll();
+		return list.stream().map(e -> new CategoryDTO(e)).collect(Collectors.toList());
 	}
 	
-	public Category findById(Long id) {		
+	public CategoryDTO findById(Long id) {		
 		Optional<Category> obj =  repository.findById(id);
-		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
+		Category entity = obj.orElseThrow(() -> new ResourceNotFoundException(id));
+		return new CategoryDTO(entity);
 	}
 	
 	
