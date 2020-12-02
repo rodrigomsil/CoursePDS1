@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.iftm.PDS1.dto.CategoryDTO;
-import com.iftm.PDS1.entities.Category;
+import com.iftm.PDS1.dto.CategoryInsertDTO;
 import com.iftm.PDS1.services.CategoryService;
 
 @RestController
@@ -39,10 +39,10 @@ public class CategoryResource {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Category> insert(@RequestBody Category obj){
-		obj = service.insert(obj);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
-		return ResponseEntity.created(uri).body(obj);
+	public ResponseEntity<CategoryDTO> insert(@RequestBody CategoryInsertDTO dto){
+		CategoryDTO newDto = service.insert(dto);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newDto.getId()).toUri();
+		return ResponseEntity.created(uri).body(newDto);
 
 	}
 

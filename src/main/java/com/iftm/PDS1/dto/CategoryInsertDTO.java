@@ -4,23 +4,23 @@ import java.io.Serializable;
 
 import com.iftm.PDS1.entities.Category;
 
-public class CategoryDTO implements Serializable {
+public class CategoryInsertDTO  implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
 	private String name;
 	
-	public CategoryDTO() {
+	public CategoryInsertDTO(){
 		
 	}
 
-	public CategoryDTO(Long id, String name) {
+	public CategoryInsertDTO(Long id, String name) {
 		super();
 		this.id = id;
 		this.name = name;
 	}
 	
-	public CategoryDTO(Category entity) {
+	public CategoryInsertDTO(Category entity) {
 		this.id = entity.getId();
 		this.name = entity.getName();	
 	}

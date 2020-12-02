@@ -4,31 +4,34 @@ import java.io.Serializable;
 
 import com.iftm.PDS1.entities.User;
 
-public class UserDTO implements Serializable {
+public class UserInsertDTO  implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
 	private String nome;
 	private String email;
 	private String phone;
+	private String password;
 	
-	public UserDTO() {
+	public UserInsertDTO() {
 		
 	}
 
-	public UserDTO(Long id, String nome, String email, String phone) {
+	public UserInsertDTO(Long id, String nome, String email, String phone, String password) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
 		this.phone = phone;
+		this.password = password;
 	}
 	
-	public UserDTO(User entity) {
+	public UserInsertDTO(User entity) {
 		this.id = entity.getId();
 		this.nome = entity.getNome();
 		this.email = entity.getEmail();
 		this.phone = entity.getPhone();
+		this.password = entity.getPassword();
 	}
 
 	public Long getId() {
@@ -62,10 +65,16 @@ public class UserDTO implements Serializable {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	
-	public User toEntity() {
-		return new User(id, nome, email, phone, null);
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	
-	
+	public User toEntity() {
+		return new User(id, nome, email, phone, password);
+	}
 }
