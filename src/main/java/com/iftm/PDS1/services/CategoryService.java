@@ -59,6 +59,7 @@ public class CategoryService {
 			return new CategoryDTO(entity);
 		}catch(EntityNotFoundException e) {
 			throw new ResourceNotFoundException(id);
+			
 		}
 		
 	}
