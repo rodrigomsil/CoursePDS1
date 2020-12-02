@@ -2,7 +2,6 @@ package com.iftm.PDS1.services;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import javax.persistence.EntityNotFoundException;
@@ -11,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.iftm.PDS1.dto.UserDTO;
 import com.iftm.PDS1.entities.User;
@@ -49,20 +49,22 @@ public class UserService {
 		}
 	}
 	
-	public User update(Long id, User obj) {
+	@Transactional
+	public UserDTO update(Long id, UserDTO dto) {
 		try {
 			User entity = repository.getOne(id);
-			updateData(entity,obj);
-			return repository.save(entity);
+			updateData(entity,dto);
+			entity = repository.save(entity);
+			return new UserDTO(entity);
 		}catch(EntityNotFoundException e) {
 			throw new ResourceNotFoundException(id);
 		}
 		
 	}
 
-	private void updateData(User entity, User obj) {
-		entity.setNome(obj.getNome());
-		entity.setEmail(obj.getEmail());
-		entity.setPhone(obj.getPhone());
+	private void updateData(User entity, UserDTO dto) {
+		entity.setNome(dto.getNome());
+		entity.setEmail(dto.getEmail());
+		entity.setPhone(dto.getPhone());
 	}
 }
