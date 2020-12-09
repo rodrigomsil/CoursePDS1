@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,8 +13,10 @@ import org.springframework.transaction.annotation.Transactional;
 import com.iftm.PDS1.dto.CategoryDTO;
 import com.iftm.PDS1.dto.ProductCategoriesDTO;
 import com.iftm.PDS1.dto.ProductDTO;
+import com.iftm.PDS1.dto.UserDTO;
 import com.iftm.PDS1.entities.Category;
 import com.iftm.PDS1.entities.Product;
+import com.iftm.PDS1.entities.User;
 import com.iftm.PDS1.repositories.CategoryRepository;
 import com.iftm.PDS1.repositories.ProductRepository;
 import com.iftm.PDS1.services.exceptions.ResourceNotFoundException;
@@ -45,6 +49,30 @@ public class ProductService {
 		return new ProductDTO(entity);
 	}
 
+	
+	@Transactional
+	public ProductDTO update(Long id, ProductCategoriesDTO dto) {
+		try {
+			Product entity = repository.getOne(id);
+			updateData(entity,dto);
+			entity = repository.save(entity);
+			return new ProductDTO(entity);
+		}catch(EntityNotFoundException e) {
+			throw new ResourceNotFoundException(id);
+		}
+		
+	}
+	
+	private void updateData(Product entity, ProductCategoriesDTO dto) {
+		entity.setNome(dto.getNome());
+		entity.setDescription(dto.getDescription());
+		entity.setPrice(dto.getPrice());
+		entity.setImgUrl(dto.getImgUrl());
+		if(dto.getCategories() != null && dto.getCategories().size() > 0) {
+			setProductCategories(entity, dto.getCategories());
+		}
+	}
+	
 	private void setProductCategories(Product entity, List<CategoryDTO> categories) {
 		entity.getCategories().clear();
 		for(CategoryDTO dto : categories) {
@@ -52,4 +80,5 @@ public class ProductService {
 			entity.getCategories().add(category);
 		}
 	}
+	
 }
