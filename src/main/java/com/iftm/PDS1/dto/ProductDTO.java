@@ -2,26 +2,14 @@ package com.iftm.PDS1.dto;
 
 import java.io.Serializable;
 
-import javax.validation.constraints.NotEmpty;
-
-import org.hibernate.validator.constraints.Length;
-
 import com.iftm.PDS1.entities.Product;
 
 public class ProductDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private Long id;
-	
-	@NotEmpty(message = "can't be empty")
-	@Length(min = 3, max = 80, message = "Length must be between 3 and 80")
+	private Long id;	
 	private String nome;
-	
-	@NotEmpty(message = "can't be empty")
-	@Length(min = 80, message = "Length must be more than 80")
 	private String description;
-	
-	@Length(min > 0 , message = "Price must be positive ")
 	private Double price;
 	private String imgUrl;
 	
