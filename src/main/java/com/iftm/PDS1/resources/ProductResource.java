@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,7 +20,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.iftm.PDS1.dto.ProductCategoriesDTO;
 import com.iftm.PDS1.dto.ProductDTO;
-import com.iftm.PDS1.dto.UserDTO;
 import com.iftm.PDS1.services.ProductService;
 
 @RestController

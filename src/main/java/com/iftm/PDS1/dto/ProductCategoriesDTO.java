@@ -19,7 +19,7 @@ public class ProductCategoriesDTO implements Serializable {
 	private String nome;
 	
 	@NotEmpty(message = "can't be empty")
-	@Length(min = 8, message = "Length must be more than 80")
+	@Length(min = 8, message = "Length must be more than 8")
 	private String description;
 	
 	@Positive
