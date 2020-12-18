@@ -2,7 +2,6 @@ package com.iftm.PDS1.services;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import javax.persistence.EntityNotFoundException;
 
@@ -11,14 +10,14 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import com.iftm.PDS1.dto.CategoryDTO;
 import com.iftm.PDS1.dto.ProductCategoriesDTO;
 import com.iftm.PDS1.dto.ProductDTO;
-import com.iftm.PDS1.dto.UserDTO;
 import com.iftm.PDS1.entities.Category;
 import com.iftm.PDS1.entities.Product;
-import com.iftm.PDS1.entities.User;
 import com.iftm.PDS1.repositories.CategoryRepository;
 import com.iftm.PDS1.repositories.ProductRepository;
 import com.iftm.PDS1.services.exceptions.DatabaseException;
@@ -33,9 +32,9 @@ public class ProductService {
 	@Autowired
 	private CategoryRepository categoryRepository;
 
-	public List<ProductDTO> findAll() {
-		List<Product> list =  repository.findAll();
-		return list.stream().map(e -> new ProductDTO(e)).collect(Collectors.toList());
+	public Page<ProductDTO> findAllPaged(Pageable pageable) {
+		Page<Product> list =  repository.findAll(pageable);
+		return list.map(e -> new ProductDTO(e));
 	}
 	
 	public ProductDTO findById(Long id) {
